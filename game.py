@@ -14,11 +14,18 @@ class SquareCrush():
 	green = (0,255,0)
 	blue = (0,0, 255)
 
-	def __init__(self,size):
+	def __init__(self,size, moves):
 		self.size = size
-		self.screen = pygame.display.set_mode((1024,768))
+		self.screen = pygame.display.set_mode((800,800))
 		self.screen.fill((255,255,255))
 		self.score = 0
+		self.moves = moves
+		pygame.font.init() # you have to call this at the start, 
+                   # if you want to use this module.
+		self.myfont = pygame.font.SysFont('sanserif', 30)
+
+		textsurface = self.myfont.render('score '+str(self.score)+"  moves left "+str(self.moves), False, (0, 0, 0))		
+		self.screen.blit(textsurface,(0,0))
 		print ("making board")
 		self.board = self.get_randomized_board()
 		self.draw_board()
@@ -26,7 +33,6 @@ class SquareCrush():
 		while matches == True:
 			matches = self.check_for_lines()
 		pygame.display.update()
-		self.moves = 15
 		
 
 
@@ -35,7 +41,7 @@ class SquareCrush():
 		mousex = 0
 		mousey = 0
 		mouse_clicks = set()
-		while self.moves > 0:
+		while self.moves >= 0:
 			mouse_clicked = False
 			for event in pygame.event.get():
 				if event.type == MOUSEBUTTONUP:
@@ -58,12 +64,25 @@ class SquareCrush():
 					pygame.display.update()
 					matches = True
 					while matches == True:
+						self.screen.fill((255,255,255))
 						matches = self.check_for_lines()
-					pygame.display.update()
+						textsurface = self.myfont.render('score '+str(self.score)+"  moves left "+str(self.moves), False, (0, 0, 0))
+						self.screen.blit(textsurface,(0,0))
+						self.draw_board()
+						pygame.display.update()
 					self.moves -= 1
 				mouse_clicks = set()
 				print("score is ",self.score)
 				print("moves left ", self.moves)
+				
+				pygame.display.update()
+				print("updated image")
+		textsurface = self.myfont.render("GAME OVER", False, (0, 0, 0))
+		self.screen.blit(textsurface, (self.size*25,self.size*25))
+		pygame.display.update()
+		print("updated with gameover message")
+		while True:
+			pass
 
 
 
@@ -155,5 +174,5 @@ class SquareCrush():
 
 
 
-sc = SquareCrush(8)
+sc = SquareCrush(8,15)
 sc.play_game()
