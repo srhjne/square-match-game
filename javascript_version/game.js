@@ -1,3 +1,5 @@
+var score = 0;
+
 function getRandomInt(min, max) {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -112,6 +114,8 @@ function playGame(board, size){
 	var pair = [];
 	var moves = 15;
 	score = 0;
+	$("#score-item").html("Score is <span id='score'></span>")
+	$("#moves-item").html("Score is <span id='moves'></span>")
 	$("#score").html(score);
 	$("#moves").html(moves);
 	$("#game").on("click", function(evt){
@@ -156,7 +160,7 @@ $("#game-form").on("submit", function(evt){
 	evt.preventDefault();
 	var size = $("#size").val();
 	var board = initializeBoard(size);
-	var score = 0;
+	score = 0;
 	drawBoard(board);
 	var check = true;
 	while (check){
