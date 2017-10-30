@@ -6,6 +6,20 @@
 	display: inline-block;
 }
 
+#wrapper {
+	border: 5px solid black;
+	border-radius: 20px;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 20px;
+	display: flex;
+}
+
+#game {
+	display: block;
+	align-self: center;
+}
+
 .r {
 	background-color: red;
 

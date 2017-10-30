@@ -115,7 +115,7 @@ function playGame(board, size){
 	var moves = 15;
 	score = 0;
 	$("#score-item").html("Score is <span id='score'></span>")
-	$("#moves-item").html("Score is <span id='moves'></span>")
+	$("#moves-item").html("Moves left <span id='moves'></span>")
 	$("#score").html(score);
 	$("#moves").html(moves);
 	$("#game").on("click", function(evt){
